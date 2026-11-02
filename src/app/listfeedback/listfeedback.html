@@ -1,0 +1,15 @@
+<h2>Student Feedback</h2>
+
+@if (service.itemsError()) {
+  <p>Database not active. Feedback can't be loaded right now.</p>
+} @else {
+  @for (item of service.items(); track item._id) {
+    <div>
+      <p>{{ item.comment }}</p>
+      <small>{{ item.date | date: 'd MMM yyyy, HH:mm' }}</small>
+      <hr>
+    </div>
+  } @empty {
+    <p>No feedback yet.</p>
+  }
+}

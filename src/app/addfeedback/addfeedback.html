@@ -1,0 +1,5 @@
+<h2>Tell us about the module</h2>
+
+<textarea #comment rows="6" cols="60" placeholder="Write your feedback here"></textarea>
+<br>
+<button (click)="submitForm(comment.value); comment.value = ''">Send</button>

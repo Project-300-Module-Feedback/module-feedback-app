@@ -1,0 +1,11 @@
+<h2>Login</h2>
+
+<input #username placeholder="Username">
+<br>
+<input #password type="password" placeholder="Password">
+<br>
+<button (click)="login(username.value, password.value)">Login</button>
+
+@if (errorMsg()) {
+  <p>{{ errorMsg() }}</p>
+}
