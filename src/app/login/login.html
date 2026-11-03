@@ -1,11 +1,11 @@
-<h2>Login</h2>
+<div class="container mt-4" style="max-width: 360px;">
+  <h2>Login</h2>
 
-<input #username placeholder="Username">
-<br>
-<input #password type="password" placeholder="Password">
-<br>
-<button (click)="login(username.value, password.value)">Login</button>
+  <input #username class="form-control mb-2" placeholder="Username">
+  <input #password class="form-control mb-2" type="password" placeholder="Password">
+  <button class="btn btn-primary w-100" (click)="login(username.value, password.value)">Login</button>
 
-@if (errorMsg()) {
-  <p>{{ errorMsg() }}</p>
-}
+  @if (errorMsg()) {
+    <p class="text-danger mt-2">{{ errorMsg() }}</p>
+  }
+</div>
