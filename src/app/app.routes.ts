@@ -8,3 +8,5 @@ export const routes: Routes = [
   { path: 'student', component: AddfeedbackComponent },
   { path: 'admin', component: ListfeedbackComponent }
 ];
+
+
