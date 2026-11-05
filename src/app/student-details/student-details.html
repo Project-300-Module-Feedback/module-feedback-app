@@ -1,0 +1,63 @@
+<main>
+  <h1>Course Survey Questionnaire</h1>
+
+  <form (submit)="continue($event)">
+    <fieldset>
+      <legend>Course details</legend>
+
+      <label for="course-id">Course</label>
+      <select id="course-id" name="courseId" required>
+        <option value="" disabled selected>Select a course</option>
+        @for (course of service.courses(); track course._id) {
+          <option [value]="course._id">{{ course.code }} - {{ course.name }}</option>
+        }
+      </select>
+      @if (service.coursesError()) {
+        <p role="alert">Courses could not be loaded.</p>
+      }
+
+      <label for="survey-date">Date</label>
+      <input id="survey-date" name="surveyDate" type="date" required>
+    </fieldset>
+
+    <fieldset>
+      <legend>Student details</legend>
+
+      <fieldset>
+        <legend>Attendance at classes</legend>
+        <label><input type="radio" name="attendance" value="over-90" required> More than 90%</label>
+        <label><input type="radio" name="attendance" value="50-90"> 50% to 90%</label>
+        <label><input type="radio" name="attendance" value="under-50"> Less than 50%</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Average weekly hours of self-study</legend>
+        <label><input type="radio" name="studyHours" value="over-20" required> More than 20</label>
+        <label><input type="radio" name="studyHours" value="10-20"> 10 to 20</label>
+        <label><input type="radio" name="studyHours" value="1-10"> 1 to 10</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Do you have a part-time job?</legend>
+        <label><input type="radio" name="hasPartTimeJob" value="yes" required> Yes</label>
+        <label><input type="radio" name="hasPartTimeJob" value="no"> No</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Weekly hours worked in your job</legend>
+        <label><input type="radio" name="workHours" value="over-20" required> More than 20</label>
+        <label><input type="radio" name="workHours" value="10-20"> 10 to 20</label>
+        <label><input type="radio" name="workHours" value="under-10"> Less than 10</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>When do you work?</legend>
+        <label><input type="radio" name="workTime" value="daytime" required> Daytime</label>
+        <label><input type="radio" name="workTime" value="night"> Night</label>
+        <label><input type="radio" name="workTime" value="weekend"> Weekend</label>
+      </fieldset>
+    </fieldset>
+
+    <button type="submit">Continue</button>
+  </form>
+</main>

@@ -1,13 +1,20 @@
 @if (service.showSuccess()) {
-  <div>Feedback sent</div>
+  <div class="alert alert-success mb-0">Feedback sent</div>
 }
 @if (service.toastError()) {
-  <div>Database not active. Unable to save your feedback.</div>
+  <div class="alert alert-danger mb-0">Database not active. Unable to save your feedback.</div>
 }
-<nav>
-  <a routerLink="/">Log out</a>
+
+<nav class="navbar navbar-expand border-bottom">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/modules">Module Feedback</a>
+    <div class="navbar-nav ms-auto">
+      <a class="nav-link" routerLink="/modules">Modules</a>
+      <a class="nav-link" routerLink="/login">Log in</a>
+    </div>
+  </div>
 </nav>
 
-<main>
+<div>
   <router-outlet></router-outlet>
-</main>
+</div>

@@ -13,7 +13,7 @@ export class LoginComponent {
 
   login(username: string, password: string) {
     if (username === 'student' && password === 'student123') {
-      this.router.navigate(['/student']);
+      this.router.navigate(['/modules']);
     } else if (username === 'admin' && password === 'admin123') {
       this.router.navigate(['/admin']);
     } else {

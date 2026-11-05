@@ -18,6 +18,8 @@
     "@angular/platform-browser": "^22.2.0",
     "@angular/router": "^22.2.0",
     "bootstrap": "^5.3.8",
+    "dotenv": "^18.0.9",
+    "mongoose": "^9.11.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
