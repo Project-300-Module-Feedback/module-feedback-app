@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
   templateUrl: './login.html'
 })
 export class LoginComponent {
-  private router = inject(Router);
-
   errorMsg = '';
+
+  constructor(private router: Router) {}
 
   login(username: string, password: string) {
     if (username === 'student' && password === 'student123') {

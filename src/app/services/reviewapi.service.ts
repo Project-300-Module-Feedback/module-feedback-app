@@ -1,12 +1,13 @@
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ModuleItem, ModuleReviews } from '../models/review';
 import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ReviewapiService {
-  private _http = inject(HttpClient);
-  private _baseUrl = environment.baseURL;
+  private baseUrl = environment.baseURL;
+
+  constructor(private http: HttpClient) {}
 
   modules = signal<ModuleItem[]>([]);
   moduleData = signal<ModuleReviews | null>(null);
@@ -15,7 +16,7 @@ export class ReviewapiService {
   errorMsg = signal<string>('');
 
   getModules() {
-    this._http.get<ModuleItem[]>(`${this._baseUrl}modules`).subscribe({
+    this.http.get<ModuleItem[]>(`${this.baseUrl}modules`).subscribe({
       next: data => {
         this.modules.set(data);
         this.errorMsg.set('');
@@ -27,7 +28,7 @@ export class ReviewapiService {
   getModuleReviews(moduleId: string) {
     this.moduleData.set(null);
     this.summary.set('');
-    this._http.get<ModuleReviews>(`${this._baseUrl}reviews/module/${moduleId}`).subscribe({
+    this.http.get<ModuleReviews>(`${this.baseUrl}reviews/module/${moduleId}`).subscribe({
       next: data => {
         this.moduleData.set(data);
         this.errorMsg.set('');
@@ -38,7 +39,7 @@ export class ReviewapiService {
 
   getSummary(moduleId: string) {
     this.summaryLoading.set(true);
-    this._http.get<{ summary: string }>(`${this._baseUrl}reviews/summary/${moduleId}`).subscribe({
+    this.http.get<{ summary: string }>(`${this.baseUrl}reviews/summary/${moduleId}`).subscribe({
       next: data => {
         this.summary.set(data.summary);
         this.summaryLoading.set(false);

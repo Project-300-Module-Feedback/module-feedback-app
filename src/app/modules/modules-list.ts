@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ModuleSummary } from '../models/module';
@@ -11,13 +11,14 @@ import { FeedbackapiService } from '../services/feedbackapi.service';
   templateUrl: './modules-list.html'
 })
 export class ModulesListComponent implements OnInit {
-  service = inject(FeedbackapiService);
   searchTerm = '';
   campus = '';
   department = '';
   semester = '';
   selectedYears: number[] = [];
   sortBy = 'name';
+
+  constructor(public service: FeedbackapiService) {}
 
   get campuses() {
     const campuses = this.service.modules().flatMap(module =>

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FeedbackapiService } from '../services/feedbackapi.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { FeedbackapiService } from '../services/feedbackapi.service';
   templateUrl: './addfeedback.html'
 })
 export class AddfeedbackComponent {
-  private service = inject(FeedbackapiService);
+  constructor(private service: FeedbackapiService) {}
 
   submitForm(comment: string) {
     this.service.addItem(comment);

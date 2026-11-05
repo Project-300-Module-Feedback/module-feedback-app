@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { FeedbackapiService } from '../services/feedbackapi.service';
 
@@ -9,7 +9,7 @@ import { FeedbackapiService } from '../services/feedbackapi.service';
   templateUrl: './listfeedback.html'
 })
 export class ListfeedbackComponent implements OnInit {
-  public service = inject(FeedbackapiService);
+  constructor(public service: FeedbackapiService) {}
 
   ngOnInit() {
     this.service.getItems();
