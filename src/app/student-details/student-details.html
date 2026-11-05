@@ -5,8 +5,16 @@
     <fieldset>
       <legend>Course details</legend>
 
-      <label for="course-code-year">Course code and year</label>
-      <input id="course-code-year" name="courseCodeYear" required>
+      <label for="course-id">Course</label>
+      <select id="course-id" name="courseId" required>
+        <option value="" disabled selected>Select a course</option>
+        @for (course of service.courses(); track course._id) {
+          <option [value]="course._id">{{ course.code }} - {{ course.name }}</option>
+        }
+      </select>
+      @if (service.coursesError()) {
+        <p role="alert">Courses could not be loaded.</p>
+      }
 
       <label for="survey-date">Date</label>
       <input id="survey-date" name="surveyDate" type="date" required>
