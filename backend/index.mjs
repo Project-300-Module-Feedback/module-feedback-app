@@ -5,6 +5,7 @@ import "express-async-errors";
 import { connectDB } from "./db/connect.mjs";
 import feedback from "./routes/feedback.mjs";
 import courses from "./routes/courses.mjs";
+import modules from "./routes/modules.mjs";
 
 const PORT = process.env.PORT || 5040;
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.json());
 
 app.use("/feedback", feedback);
 app.use("/courses", courses);
+app.use("/modules", modules);
 
 app.use((err, _req, res, _next) => {
   console.error(err);                  

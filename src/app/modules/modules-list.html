@@ -1,0 +1,94 @@
+<main class="container py-4">
+  <div class="row g-4">
+    <aside class="col-12 col-lg-3">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h5 mb-0">Filters</h2>
+        <button class="btn btn-link btn-sm" type="button" (click)="clearFilters()">Clear all</button>
+      </div>
+
+      <label class="form-label" for="campus-filter">Campus</label>
+      <select id="campus-filter" class="form-select mb-3" (change)="updateCampus($event)">
+        <option value="">All campuses</option>
+        @for (campus of campuses(); track campus) {
+          <option [value]="campus">{{ campus }}</option>
+        }
+      </select>
+
+      <label class="form-label" for="department-filter">Department</label>
+      <select id="department-filter" class="form-select mb-3" (change)="updateDepartment($event)">
+        <option value="">All departments</option>
+        @for (department of departments(); track department) {
+          <option [value]="department">{{ department }}</option>
+        }
+      </select>
+
+      <fieldset class="mb-3">
+        <legend class="fs-6">Year</legend>
+        @for (year of [1, 2, 3, 4]; track year) {
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" [id]="'year-' + year" (change)="toggleYear(year, $event)">
+            <label class="form-check-label" [for]="'year-' + year">Year {{ year }}</label>
+          </div>
+        }
+      </fieldset>
+
+      <label class="form-label" for="semester-filter">Semester</label>
+      <select id="semester-filter" class="form-select" (change)="updateSemester($event)">
+        <option value="">Any semester</option>
+        <option value="1">Semester 1</option>
+        <option value="2">Semester 2</option>
+      </select>
+    </aside>
+
+    <section class="col-12 col-lg-9" aria-labelledby="modules-heading">
+      <div class="row g-3 align-items-end mb-4">
+        <div class="col-12 col-md">
+          <h1 id="modules-heading">Modules</h1>
+          <p class="mb-0">Find a module you have taken and share how it went.</p>
+        </div>
+        <div class="col-12 col-md-6">
+          <label class="form-label" for="module-search">Search by module name or code</label>
+          <input id="module-search" class="form-control" type="search" placeholder="e.g. Databases" (input)="updateSearch($event)">
+        </div>
+      </div>
+
+      @if (service.modulesLoading()) {
+        <p role="status">Loading modules...</p>
+      } @else if (service.modulesError()) {
+        <p role="alert">Modules could not be loaded. Check the backend connection and try again.</p>
+      } @else {
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <p class="mb-0"><strong>{{ filteredModules().length }} modules</strong> match your filters</p>
+          <label class="d-flex align-items-center gap-2">
+            <span>Sort by</span>
+            <select class="form-select" aria-label="Sort modules" (change)="updateSort($event)">
+              <option value="name">Module name</option>
+              <option value="rating">Highest rated</option>
+              <option value="reviews">Most reviews</option>
+            </select>
+          </label>
+        </div>
+
+        @for (module of filteredModules(); track module._id) {
+          <article class="border rounded p-3 mb-3">
+            <div class="row g-3 align-items-center">
+              <div class="col">
+                <p class="text-body-secondary mb-1">{{ module.code }} · Year {{ module.year }} · Semester {{ module.semester }} · {{ module.credits }} credits</p>
+                <h2 class="h5 mb-1">{{ module.name }}</h2>
+                @if (primaryCourse(module); as course) {
+                  <p class="text-body-secondary mb-0">{{ course.department }} · {{ course.campus }}</p>
+                }
+              </div>
+              <div class="col-auto text-md-end">
+                <p class="mb-2">{{ module.averageRating === null ? 'No ratings' : (module.averageRating | number:'1.1-1') + ' / 5' }} · {{ module.reviewCount }} reviews</p>
+                <a class="btn btn-outline-secondary" [routerLink]="['/modules', module._id]">View and review</a>
+              </div>
+            </div>
+          </article>
+        } @empty {
+          <p>No modules match your filters.</p>
+        }
+      }
+    </section>
+  </div>
+</main>
