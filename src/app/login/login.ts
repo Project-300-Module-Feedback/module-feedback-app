@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   private router = inject(Router);
 
-  errorMsg = signal<string>('');
+  errorMsg = '';
 
   login(username: string, password: string) {
     if (username === 'student' && password === 'student123') {
@@ -17,7 +17,7 @@ export class LoginComponent {
     } else if (username === 'admin' && password === 'admin123') {
       this.router.navigate(['/admin']);
     } else {
-      this.errorMsg.set('Wrong username or password');
+      this.errorMsg = 'Wrong username or password';
     }
   }
 }
