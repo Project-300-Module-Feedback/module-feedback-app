@@ -17,6 +17,9 @@ app.use("/feedback", feedback);
 app.use("/courses", courses);
 app.use("/modules", modules);
 
+app.use("/modules", modules);
+app.use("/reviews", reviews);
+
 app.use((err, _req, res, _next) => {
   console.error(err);                  
   res.status(500).send("Uh oh! An unexpected error occurred.");

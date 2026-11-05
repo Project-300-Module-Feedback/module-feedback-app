@@ -1,15 +1,29 @@
-<h2>Student Feedback</h2>
+<div class="container mt-4" style="max-width: 600px;">
+  <h2>Student Feedback</h2>
 
-@if (service.itemsError()) {
-  <p>Database not active. Feedback can't be loaded right now.</p>
-} @else {
-  @for (item of service.items(); track item._id) {
-    <div>
-      <p>{{ item.comment }}</p>
-      <small>{{ item.date | date: 'd MMM yyyy, HH:mm' }}</small>
-      <hr>
-    </div>
-  } @empty {
-    <p>No feedback yet.</p>
+  <button class="btn btn-primary mb-3" (click)="service.getSummary()" [disabled]="service.summaryLoading()">
+    Summarise with AI
+  </button>
+
+  @if (service.summaryLoading()) {
+    <p class="text-muted">Making summary...</p>
   }
-}
+  @if (service.summary()) {
+    <div class="alert alert-info" style="white-space: pre-line">{{ service.summary() }}</div>
+  }
+
+  @if (service.itemsError()) {
+    <p class="text-danger">Database not active. Feedback can't be loaded right now.</p>
+  } @else {
+    @for (item of service.items(); track item._id) {
+      <div class="card mb-2">
+        <div class="card-body">
+          <p class="mb-1">{{ item.comment }}</p>
+          <small class="text-muted">{{ item.date | date: 'd MMM yyyy, HH:mm' }}</small>
+        </div>
+      </div>
+    } @empty {
+      <p class="text-muted">No feedback yet.</p>
+    }
+  }
+</div>

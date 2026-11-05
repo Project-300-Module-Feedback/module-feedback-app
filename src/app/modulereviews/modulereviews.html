@@ -1,0 +1,53 @@
+<h2>Module Reviews</h2>
+
+@if (service.errorMsg()) {
+  <p>{{ service.errorMsg() }}</p>
+}
+
+<select #moduleSelect (change)="pickModule(moduleSelect.value)">
+  <option value="">Pick a module</option>
+  @for (mod of service.modules(); track mod._id) {
+    <option [value]="mod._id">Year {{ mod.year }} · Sem {{ mod.semester }} · {{ mod.name }}</option>
+  }
+</select>
+
+@if (service.moduleData(); as data) {
+  <p>{{ data.count }} reviews</p>
+
+  @if (!data.enough) {
+    <p>Results show once this module has at least {{ data.minReviews }} reviews. This keeps students anonymous.</p>
+  } @else {
+    <h3>Averages (out of 5)</h3>
+    <ul>
+      <li>Overall: {{ data.stats?.overall }}</li>
+      <li>Teaching: {{ data.stats?.teaching }}</li>
+      <li>Content: {{ data.stats?.content }}</li>
+      <li>Assessment fairness: {{ data.stats?.assessmentFairness }}</li>
+      <li>Study hours per week: {{ data.stats?.hoursPerWeek }}</li>
+      <li>Would recommend: {{ data.stats?.recommendPercent }}%</li>
+    </ul>
+
+    <button (click)="summarise()" [disabled]="service.summaryLoading()">Summarise with AI</button>
+
+    @if (service.summaryLoading()) {
+      <p>Making summary...</p>
+    }
+    @if (service.summary()) {
+      <p style="white-space: pre-line">{{ service.summary() }}</p>
+    }
+
+    <h3>Reviews</h3>
+    @for (review of data.reviews; track review._id) {
+      <div>
+        <strong>{{ review.headline }}</strong> · {{ review.overall }}/5
+        <p>{{ review.body }}</p>
+        <small>
+          Taken {{ review.yearTaken }} ·
+          {{ review.recommend ? 'Recommends' : "Doesn't recommend" }} ·
+          {{ review.createdAt | date: 'd MMM yyyy' }}
+        </small>
+        <hr>
+      </div>
+    }
+  }
+}

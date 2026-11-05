@@ -1,0 +1,33 @@
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { ReviewapiService } from '../services/reviewapi.service';
+
+@Component({
+  selector: 'app-modulereviews',
+  standalone: true,
+  imports: [DatePipe],
+  templateUrl: './modulereviews.html',
+  styleUrl: './modulereviews.css'
+})
+export class ModulereviewsComponent implements OnInit {
+  public service = inject(ReviewapiService);
+
+  selectedId = signal<string>('');
+
+  ngOnInit() {
+    this.service.getModules();
+  }
+
+  pickModule(moduleId: string) {
+    this.selectedId.set(moduleId);
+    if (moduleId) {
+      this.service.getModuleReviews(moduleId);
+    } else {
+      this.service.moduleData.set(null);
+    }
+  }
+
+  summarise() {
+    this.service.getSummary(this.selectedId());
+  }
+}
