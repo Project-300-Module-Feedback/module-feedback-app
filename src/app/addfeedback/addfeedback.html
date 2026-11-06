@@ -1,6 +1,107 @@
-<div class="container mt-4" style="max-width: 600px;">
-  <h2>Tell us about the module</h2>
+<main class="container review-page py-4">
+  <nav aria-label="Breadcrumb" class="small mb-3">
+    <a routerLink="/modules">Modules</a>
+    <span class="text-body-secondary"> / Write a review</span>
+  </nav>
 
-  <textarea #comment class="form-control mb-2" rows="6" placeholder="Write your feedback here"></textarea>
-  <button class="btn btn-primary" (click)="submitForm(comment.value); comment.value = ''">Send</button>
-</div>
+  <div class="row g-4 align-items-start">
+    <section class="col-12 col-lg-8" aria-labelledby="review-title">
+      <form class="review-panel">
+        <h1 id="review-title" class="h3">Review this module</h1>
+
+        <fieldset class="mb-3">
+          <legend class="form-label">Overall rating</legend>
+          <div class="rating-row">
+            @for (rating of [1, 2, 3, 4, 5]; track rating) {
+              <label class="rating-choice"><input type="radio" name="overall" [value]="rating" required> {{ rating }}</label>
+            }
+          </div>
+          <div class="form-text">1 = poor, 5 = excellent</div>
+        </fieldset>
+
+        <div class="row g-3 mb-3">
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="teaching">Teaching and delivery</label>
+            <select id="teaching" name="teaching" class="form-select" required>
+              <option value="" disabled selected>Select 1–5</option>
+              @for (rating of [1, 2, 3, 4, 5]; track rating) { <option [value]="rating">{{ rating }}</option> }
+            </select>
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="content">Content and relevance</label>
+            <select id="content" name="content" class="form-select" required>
+              <option value="" disabled selected>Select 1–5</option>
+              @for (rating of [1, 2, 3, 4, 5]; track rating) { <option [value]="rating">{{ rating }}</option> }
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="form-label" for="assessment">Assessment fairness</label>
+            <select id="assessment" name="assessmentFairness" class="form-select" required>
+              <option value="" disabled selected>Select 1–5</option>
+              @for (rating of [1, 2, 3, 4, 5]; track rating) { <option [value]="rating">{{ rating }}</option> }
+            </select>
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="year-taken">Academic year taken</label>
+            <select id="year-taken" name="yearTaken" class="form-select" required>
+              <option value="" disabled selected>Select year</option>
+              <option>2022/23</option><option>2023/24</option><option>2024/25</option><option>2025/26</option><option>2026/27</option>
+            </select>
+          </div>
+          <div class="col-12 col-md-6">
+            <label class="form-label" for="hours">Study hours per week</label>
+            <select id="hours" name="hoursPerWeek" class="form-select" required>
+              <option value="" disabled selected>Select range</option>
+              <option value="3">1–5 hours</option><option value="8">6–10 hours</option><option value="15">11–20 hours</option><option value="25">21–30 hours</option><option value="40">More than 30 hours</option>
+            </select>
+          </div>
+        </div>
+
+        <fieldset class="mb-3">
+          <legend class="form-label">Would you recommend it?</legend>
+          <div class="rating-row">
+            <label class="rating-choice"><input type="radio" name="recommend" value="yes" required> Yes</label>
+            <label class="rating-choice"><input type="radio" name="recommend" value="no"> No</label>
+          </div>
+        </fieldset>
+
+        <div class="mb-3">
+          <label class="form-label" for="headline">Headline</label>
+          <input id="headline" name="headline" class="form-control" maxlength="100" placeholder="Sum it up in one line" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="review-body">Your review</label>
+          <textarea id="review-body" name="body" class="form-control" rows="5" minlength="50" maxlength="1500" placeholder="What was good, what could be better, and what should future students know?" required></textarea>
+          <div class="form-text">Minimum 50 characters · Maximum 1500</div>
+        </div>
+
+        <div class="form-check mb-2">
+          <input id="anonymous" name="anonymous" class="form-check-input" type="checkbox" checked>
+          <label class="form-check-label" for="anonymous">Post anonymously</label>
+        </div>
+        <div class="form-check mb-3">
+          <input id="honest" name="honest" class="form-check-input" type="checkbox" required>
+          <label class="form-check-label" for="honest">I confirm I took this module and this review is honest.</label>
+        </div>
+
+        <p class="small text-body-secondary border-top pt-3 mb-3">Review submission is not available yet.</p>
+        <div class="d-flex justify-content-end gap-2 border-top pt-3">
+          <a class="btn btn-outline-secondary" routerLink="/modules">Cancel</a>
+          <button class="btn btn-primary" type="submit" disabled>Submit review</button>
+        </div>
+      </form>
+    </section>
+
+    <aside class="col-12 col-lg-4">
+      <section class="guidelines" aria-labelledby="guidelines-title">
+        <h2 id="guidelines-title" class="h6">Review guidelines</h2>
+        <ul class="small mb-0">
+          <li>Be specific: say what helped or got in the way.</li>
+          <li>Focus on the module, not on individuals.</li>
+          <li>No personal attacks or private information.</li>
+          <li>Reviews may be edited or removed if they break these rules.</li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+</main>

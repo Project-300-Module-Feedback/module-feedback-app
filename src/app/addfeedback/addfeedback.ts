@@ -1,15 +1,11 @@
-import { Component, inject } from '@angular/core';
-import { FeedbackapiService } from '../services/feedbackapi.service';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-addfeedback',
   standalone: true,
-  templateUrl: './addfeedback.html'
+ // imports: [RouterLink],
+  templateUrl: './addfeedback.html',
+  styleUrl: './addfeedback.css'
 })
-export class AddfeedbackComponent {
-  private service = inject(FeedbackapiService);
-
-  submitForm(comment: string) {
-    this.service.addItem(comment);
-  }
-}
+export class AddfeedbackComponent {}

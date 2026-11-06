@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { ReviewapiService } from '../services/reviewapi.service';
 
@@ -10,16 +10,16 @@ import { ReviewapiService } from '../services/reviewapi.service';
   styleUrl: './modulereviews.css'
 })
 export class ModulereviewsComponent implements OnInit {
-  public service = inject(ReviewapiService);
+  constructor(public service: ReviewapiService) {}
 
-  selectedId = signal<string>('');
+  selectedId = '';
 
   ngOnInit() {
     this.service.getModules();
   }
 
   pickModule(moduleId: string) {
-    this.selectedId.set(moduleId);
+    this.selectedId = moduleId;
     if (moduleId) {
       this.service.getModuleReviews(moduleId);
     } else {
@@ -28,6 +28,6 @@ export class ModulereviewsComponent implements OnInit {
   }
 
   summarise() {
-    this.service.getSummary(this.selectedId());
+    this.service.getSummary(this.selectedId);
   }
 }

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FeedbackapiService } from '../services/feedbackapi.service';
 
@@ -8,8 +8,7 @@ import { FeedbackapiService } from '../services/feedbackapi.service';
   templateUrl: './student-details.html'
 })
 export class StudentDetailsComponent implements OnInit {
-  private router = inject(Router);
-  service = inject(FeedbackapiService);
+  constructor(private router: Router, public service: FeedbackapiService) {}
 
   ngOnInit() {
     this.service.getCourses();

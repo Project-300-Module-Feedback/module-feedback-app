@@ -1,4 +1,4 @@
-import { Component, OnInit, computed, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FeedbackapiService } from '../services/feedbackapi.service';
@@ -10,13 +10,14 @@ import { FeedbackapiService } from '../services/feedbackapi.service';
   templateUrl: './module-detail.html'
 })
 export class ModuleDetailComponent implements OnInit {
-  service = inject(FeedbackapiService);
-  private route = inject(ActivatedRoute);
+  constructor(public service: FeedbackapiService, private route: ActivatedRoute) {}
 
-  ratingCounts = computed(() => [5, 4, 3, 2, 1].map(rating => ({
-    rating,
-    count: this.service.ratingDistribution().find(item => item.rating === rating)?.count ?? 0
-  })));
+  get ratingCounts() {
+    return [5, 4, 3, 2, 1].map(rating => ({
+      rating,
+      count: this.service.ratingDistribution().find(item => item.rating === rating)?.count ?? 0
+    }));
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {

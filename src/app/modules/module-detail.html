@@ -21,7 +21,7 @@
           }
         </div>
         <div class="col-12 col-md-5" aria-label="Rating distribution">
-          @for (item of ratingCounts(); track item.rating) {
+          @for (item of ratingCounts; track item.rating) {
             <div class="d-flex align-items-center gap-2 mb-2">
               <span>{{ item.rating }}</span>
               <div class="progress flex-grow-1" role="progressbar" [attr.aria-label]="item.rating + ' star reviews'" [attr.aria-valuenow]="item.count" [attr.aria-valuemin]="0" [attr.aria-valuemax]="module.reviewCount">

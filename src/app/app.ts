@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet, RouterLink } from '@angular/router';
 import { FeedbackapiService } from './services/feedbackapi.service';
 
@@ -10,6 +10,5 @@ import { FeedbackapiService } from './services/feedbackapi.service';
   styleUrl: './app.css'
 })
 export class App {
-  service = inject(FeedbackapiService);
-  title = 'Module Feedback';
+  constructor(public service: FeedbackapiService) {}
 }

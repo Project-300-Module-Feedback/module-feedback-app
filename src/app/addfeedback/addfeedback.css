@@ -1,0 +1,46 @@
+:host {
+	display: block;
+	min-height: calc(100vh - 57px);
+	background: #f6f7f3;
+}
+
+.review-page {
+	max-width: 1120px;
+}
+
+.review-panel,
+.guidelines {
+	border: 1px solid #d8dbd4;
+	background: #fff;
+	padding: 1.5rem;
+}
+
+.rating-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.rating-choice {
+	display: inline-flex;
+	min-height: 2.5rem;
+	align-items: center;
+	gap: 0.35rem;
+	padding: 0.35rem 0.65rem;
+	border: 1px solid #c9cdc6;
+	cursor: pointer;
+}
+
+.guidelines {
+	padding: 1rem;
+}
+
+.guidelines li + li {
+	margin-top: 0.5rem;
+}
+
+@media (max-width: 575.98px) {
+	.review-panel {
+		padding: 1rem;
+	}
+}
