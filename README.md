@@ -1,31 +1,18 @@
-A Web app that allows ATU students to give constructive feedback and positive recognition to lecturers.
-
-Built as part of Project 300 by
-Benjamin Chadwick
-Dylan Glynn
-Mehmet Buk
-Horuiaf Uzzaman
-
-Tech Stack
-Frontend : Angular
-Language : TypeScript
-Version Control: Github and git
-
-GOOGLE DRIVE FOLDER - https://drive.google.com/drive/folders/10XEn0JW29z0Tw5dj67Cv6yPpchmQtWhm?usp=sharing
-
----------------------------------
-LOGS
 # Project 300 – Module Feedback System
 
+A web app that lets ATU students give constructive feedback and positive recognition to lecturers.
+
 ATU Sligo · 2026/27
+
+**Google Drive folder:** https://drive.google.com/drive/folders/10XEn0JW29z0Tw5dj67Cv6yPpchmQtWhm?usp=sharing
 
 ---
 
 ## Where we are now
 
-**Week 1 · Sprint 0 · Setup**
+**Week 4 · Sprint 1 · Building**
 
-Next deadline: **Tech stack decided – Fri 16 Oct**
+Next deadline: **MVP finished – Fri 27 Nov**
 
 ---
 
@@ -33,10 +20,23 @@ Next deadline: **Tech stack decided – Fri 16 Oct**
 
 | Name | Student No. | Job |
 |------|-------------|-----|
-| Mehmet Ali Buk | s00254071 | Project Manager |
-| Horuiaf Uzzaman | s00272951 | Backend |
+| Mehmet Ali Buk | s00254071 | Project Manager + Backend |
+| Horuiaf Uzzaman | s00272951 | Logs, Word doc, spreadsheet, README |
 | Dylan Glynn | s00254978 | Frontend / UI |
 | Benjamin Chadwick | s00252669 | Database & Testing |
+
+---
+
+## Tech Stack
+
+| Part | What we use |
+|------|-------------|
+| Frontend | Angular |
+| Backend | Node.js + Express |
+| Database | MongoDB |
+| Language | TypeScript |
+| AI summary | Google Gemini |
+| Version control | Git and GitHub |
 
 ---
 
@@ -63,19 +63,19 @@ Next deadline: **Tech stack decided – Fri 16 Oct**
 
 | Name | Assigned work |
 |------|---------------|
-| Mehmet |LOGS |
-| Horuiaf | EXCEL/WORD SHEET|
-| Dylan |WIREFRAMES |
-| Benjamin |REPO |
+| Mehmet | Logs |
+| Horuiaf | Excel and Word sheets |
+| Dylan | Wireframes |
+| Benjamin | Repo |
 
 **Done:**
--LOGS,EXCEL/WORD SHEET,WIREFRAMES,RREPO
+- Logs, Excel and Word sheets, wireframes, repo
 
 **Struggles:**
--EXCEL WORKSHEET
+- Excel worksheet
 
 **Next week:**
--
+- Pick the tech stack
 
 ---
 
@@ -85,18 +85,63 @@ Next deadline: **Tech stack decided – Fri 16 Oct**
 
 | Name | Assigned work |
 |------|---------------|
-| Mehmet |GOOGLE SHARDER DRIVR |
-| Horuiaf |REDONE EXCEL/WORD SHEET |
-| Dylan | |
-| Benjamin |REPO |
+| Mehmet | Shared Google Drive |
+| Horuiaf | Redo Excel and Word sheets |
+| Dylan | - |
+| Benjamin | Repo |
 
 **Done:**
--SHARED GOOGEL DRIVE
+- Shared Google Drive set up
+- Picked the tech stack: Angular, Node.js / Express, MongoDB
+- Agreed the MoSCoW list of features
 
 **Struggles:**
 -
 
 **Next week:**
--
+- Get the website started
 
 ---
+
+### Week 3 – 19 Oct
+
+**Goal:** Get the website started
+
+| Name | Assigned work |
+|------|---------------|
+| Mehmet | Backend |
+| Horuiaf | Redo Excel and Word sheets, logs |
+| Dylan | Frontend |
+| Benjamin | Backend, database |
+
+**Done:**
+- Agreed how the database, frontend and backend will work
+
+**Struggles:**
+- Login
+
+**Next week:**
+- Get login working
+- Save a feedback response to the database and show it on the lecturer page
+
+---
+
+### Week 4 – 2 Nov
+
+**Goal:** Get login working and save the first feedback
+
+| Name | Assigned work |
+|------|---------------|
+| Mehmet | Backend |
+| Horuiaf | Redo Excel and Word sheets, logs |
+| Dylan | Frontend |
+| Benjamin | Backend, database |
+
+**Done:**
+-
+
+**Struggles:**
+- Database
+
+**Next week:**
+-
