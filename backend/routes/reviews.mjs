@@ -6,10 +6,10 @@ import { aiReady, summariseReviews } from "../ai/gemini.mjs";
 
 const router = express.Router();
 
-// Results only show once a module has this many reviews, so no one can be picked out
+// need at least this many reviews before we show anything, keeps it anonymous
 const MIN_REVIEWS = 3;
 
-// Most reviews we send to the AI in one go
+// max reviews we send to gemini at once
 const MAX_FOR_AI = 100;
 
 // GET /reviews/module/:moduleId - stats and reviews for one module
@@ -35,7 +35,7 @@ router.get("/module/:moduleId", async (req, res) => {
   });
 });
 
-// GET /reviews/summary/:moduleId - AI summary of one module's reviews
+// GET /reviews/summary/:moduleId - gemini summary for one module
 router.get("/summary/:moduleId", async (req, res) => {
   const { moduleId } = req.params;
   if (!mongoose.isValidObjectId(moduleId)) {

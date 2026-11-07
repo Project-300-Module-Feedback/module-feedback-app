@@ -4,9 +4,11 @@ import { connectDB } from "./db/connect.mjs";
 import Module from "./models/Module.mjs";
 import Review from "./models/Review.mjs";
 
-// TEST DATA ONLY. Run seed.mjs first so the modules exist.
-// Change this to seed a different module.
+// fake reviews just for testing, run seed.mjs first so the modules are there
+// change this if you want to use a different module
 const MODULE_CODE = "COMP07180"; // Web Programming 2
+
+// fake student ids for now until we have real users
 
 // PLACEHOLDER: fake student ids until real users exist
 const fakeUserId = n => new mongoose.Types.ObjectId(n.toString(16).padStart(24, "0"));
@@ -50,7 +52,7 @@ try {
   const targetModule = await Module.findOne({ code: MODULE_CODE });
   if (!targetModule) throw new Error(`Module ${MODULE_CODE} not found. Run seed.mjs first.`);
 
-  // Create or update each test review (safe to run more than once)
+// creates or updates the reviews so you can run it more than once
   const ops = reviews.map((review, i) => {
     const userId = fakeUserId(i + 1);
     return {

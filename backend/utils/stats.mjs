@@ -1,4 +1,4 @@
-// Rating fields we average. Add a field name here to include it everywhere.
+// the ratings we work out averages for, add more here if we need them
 export const RATING_FIELDS = ["overall", "teaching", "content", "assessmentFairness"];
 
 export function average(reviews, field) {
