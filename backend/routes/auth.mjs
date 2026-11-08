@@ -77,7 +77,7 @@ router.post("/register", makeLimiter(), async (req, res) => {
 });
 
 
- // Login endpoint
+ // Verify endpoint
 router.post("/verify", makeLimiter(), async (req, res) => {
   const email = normaliseEmail(req.body.email);
   const code = String(req.body.code || "").trim();
