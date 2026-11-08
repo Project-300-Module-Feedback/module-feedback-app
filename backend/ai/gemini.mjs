@@ -29,7 +29,7 @@ async function askGemini(text) {
     `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
     {
       method: "POST",
-      signal: AbortSignal.timeout(30000),
+      signal: AbortSignal.timeout(60000),
       headers: {
         "Content-Type": "application/json",
         "x-goog-api-key": process.env.GEMINI_API_KEY,
