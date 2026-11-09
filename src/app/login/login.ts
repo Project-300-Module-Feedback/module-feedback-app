@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,17 +8,28 @@ import { Router } from '@angular/router';
   templateUrl: './login.html'
 })
 export class LoginComponent {
-  errorMsg = '';
+  errorMsg = signal('');
+  loading = signal(false);
 
-  constructor(private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) {}
 
-  login(username: string, password: string) {
-    if (username === 'student' && password === 'student123') {
-      this.router.navigate(['/modules']);
-    } else if (username === 'admin' && password === 'admin123') {
-      this.router.navigate(['/admin']);
-    } else {
-      this.errorMsg = 'Wrong username or password';
-    }
+  login(email: string, password: string) {
+    this.errorMsg.set('');
+    this.loading.set(true);
+
+    this.auth.login(email, password).subscribe({
+      next: res => {
+        this.loading.set(false);
+        if (res.user.role === 'admin') {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/modules']);
+        }
+      },
+      error: err => {
+        this.loading.set(false);
+        this.errorMsg.set(err.error?.error || 'Could not reach the server');
+      }
+    });
   }
 }
