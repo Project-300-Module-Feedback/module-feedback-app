@@ -141,7 +141,7 @@ Next deadline: **MVP finished – Fri 27 Nov**
 -
 
 **Struggles:**
-- Database
+- finding an api to use 
 
 **Next week:**
 -
