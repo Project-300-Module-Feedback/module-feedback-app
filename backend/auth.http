@@ -1,0 +1,33 @@
+  @base = http://127.0.0.1:5050
+
+### 1. Register (code appears in the cmd window)
+POST {{base}}/auth/register
+Content-Type: application/json
+
+{ "email": "test@atu.ie", "password": "password123" }
+
+### 2. Login before verifying -> expect 403
+POST {{base}}/auth/login
+Content-Type: application/json
+
+{ "email": "test@atu.ie", "password": "password123" }
+
+### 3. Verify (paste the code from the terminal)
+POST {{base}}/auth/verify
+Content-Type: application/json
+
+{ "email": "test@atu.ie", "code": "123006" }
+
+### 4. Login -> expect 200 and a token
+# @name login
+POST {{base}}/auth/login
+Content-Type: application/json
+
+{ "email": "test@atu.ie", "password": "password123" }
+
+### 5. Who am I? (uses the token from request 4)
+GET {{base}}/auth/me
+Authorization: Bearer {{login.response.body.token}}
+
+### 6. No token -> expect 401
+GET {{base}}/auth/me
