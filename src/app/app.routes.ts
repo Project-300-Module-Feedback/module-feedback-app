@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './not-found/not-found';
 import { Routes } from '@angular/router';
 import { LoginComponent } from './login/login';
 import { AddfeedbackComponent } from './addfeedback/addfeedback';
@@ -17,7 +18,10 @@ export const routes: Routes = [
   },
   { path: 'student', component: StudentDetailsComponent },
   { path: 'student/feedback', component: AddfeedbackComponent },
-  { path: 'admin', component: ListfeedbackComponent }
+    { path: 'admin', component: ListfeedbackComponent },
+
+  // keep this one last, it catches any page that doesn't exist
+  { path: '**', component: NotFoundComponent }
 ];
 
 

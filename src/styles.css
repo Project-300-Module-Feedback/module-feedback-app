@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+/* Dark mode: the review form uses fixed light colours, so swap them for Bootstrap's */
+[data-bs-theme="dark"] app-addfeedback {
+  background: var(--bs-tertiary-bg) !important;
+}
+
+[data-bs-theme="dark"] .review-panel,
+[data-bs-theme="dark"] .guidelines {
+  background: var(--bs-body-bg) !important;
+  border-color: var(--bs-border-color) !important;
+}
+
+[data-bs-theme="dark"] .rating-choice {
+  border-color: var(--bs-border-color) !important;
+}
