@@ -1,11 +1,16 @@
 <div class="container mt-4" style="max-width: 360px;">
   <h2>Login</h2>
 
-  <input #username class="form-control mb-2" placeholder="Username">
-  <input #password class="form-control mb-2" type="password" placeholder="Password">
-  <button class="btn btn-primary w-100" (click)="login(username.value, password.value)">Login</button>
+  <input #email class="form-control mb-2" type="email" placeholder="ATU email">
+  <input #password class="form-control mb-2" type="password" placeholder="Password"
+         (keyup.enter)="login(email.value, password.value)">
 
-  @if (errorMsg) {
-    <p class="text-danger mt-2">{{ errorMsg }}</p>
+  <button class="btn btn-primary w-100" [disabled]="loading()"
+          (click)="login(email.value, password.value)">
+    {{ loading() ? 'Logging in...' : 'Login' }}
+  </button>
+
+  @if (errorMsg()) {
+    <p class="text-danger mt-2">{{ errorMsg() }}</p>
   }
 </div>
