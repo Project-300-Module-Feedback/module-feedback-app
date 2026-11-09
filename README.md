@@ -132,16 +132,34 @@ Next deadline: **MVP finished – Fri 27 Nov**
 
 | Name | Assigned work |
 |------|---------------|
-| Mehmet | Backend |
-| Horuiaf | Redo Excel and Word sheets, logs |
-| Dylan | Frontend |
-| Benjamin | Backend, database |
+| Mehmet | Backend, AI summary (Google Gemini) |
+| Horuiaf | Logs, 404 page, dark mode, thank you page |
+| Dylan | Frontend, login page |
+| Benjamin | Database, login and sign up (backend) |
 
 **Done:**
--
+- Database designed with 5 collections: Course, User, Module, Review, Verification
+- Switched to Mongoose so every collection has a schema with validation
+- MongoDB Atlas cluster set up, with a database user for each team member
+- Seed script loads AU957 Software Development and 42 modules
+- Sign up with ATU email only, passwords hashed with bcrypt
+- 6-digit email code that expires after 15 minutes (prints in the terminal for now)
+- Login gives a JWT token, with role checks for student and admin
+- Rate limiting: 10 tries per 15 minutes
+- AI summary of feedback on the admin page
+- Login page connected to the backend
+- 404 page, dark mode and thank you page
 
 **Struggles:**
-- finding an api to use 
+- Team members couldn't connect to the database at first (fixed by changing IPs and passwords)
+- Port 5040 clashed with a Windows service, so the backend moved to 5050
+- Packages and folders got installed in the root instead of backend
+- Logging in to the admin page (no admin account yet)
+- Finding an API to use
 
 **Next week:**
--
+- Talk to Vivion about which API to use
+- Create admin accounts
+- Send real verification emails (Nodemailer)
+- Jest tests and a bad word filter
+- Add stats boxes, loading spinner and character counter
