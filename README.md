@@ -163,3 +163,25 @@ Next deadline: **MVP finished – Fri 27 Nov**
 - Send real verification emails (Nodemailer)
 - Jest tests and a bad word filter
 - Add stats boxes, loading spinner and character counter
+
+
+---
+### Week 5
+
+**Goal:**Working dashboard
+
+| Name | Assigned work |
+|------|---------------|
+| Mehmet |  |
+| Horuiaf |  |
+| Dylan |  |
+| Benjamin |  |
+
+**Done:**
+- 
+
+**Struggles:**
+- 
+
+**Next week:**
+- 
