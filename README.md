@@ -10,7 +10,7 @@ ATU Sligo · 2026/27
 
 ## Where we are now
 
-**Week 4 · Sprint 1 · Building**
+**Week 5 **
 
 Next deadline: **MVP finished – Fri 27 Nov**
 
