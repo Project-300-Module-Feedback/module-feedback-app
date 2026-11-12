@@ -4,6 +4,7 @@ export interface ModuleItem {
   name: string;
   year: number;
   semester: number;
+  reviewCount?: number;
 }
 
 export interface Review {
@@ -34,5 +35,6 @@ export interface ModuleReviews {
   enough: boolean;
   minReviews: number;
   stats: ReviewStats | null;
+  ratings: { rating: number; count: number }[];
   reviews: Review[];
 }

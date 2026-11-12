@@ -1,0 +1,13 @@
+.rating-label {
+  width: 3rem;
+}
+
+.rating-count {
+  width: 2rem;
+  text-align: right;
+}
+
+/* keeps the line breaks from the AI summary */
+.summary-text {
+  white-space: pre-line;
+}

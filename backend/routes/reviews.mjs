@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import Review from "../models/Review.mjs";
-import { getStats } from "../utils/stats.mjs";
+import { getStats, getRatingCounts } from "../utils/stats.mjs";
 import { aiReady, summariseReviews } from "../ai/gemini.mjs";
 
 const router = express.Router();
@@ -31,6 +31,7 @@ router.get("/module/:moduleId", async (req, res) => {
     enough,
     minReviews: MIN_REVIEWS,
     stats: enough ? getStats(reviews) : null,
+    ratings: enough ? getRatingCounts(reviews) : [],
     reviews: enough ? reviews : [],
   });
 });
@@ -60,6 +61,7 @@ router.get("/summary/:moduleId", async (req, res) => {
     const summary = await summariseReviews(reviews);
     res.status(200).json({ summary });
   } catch (err) {
+    console.error("Summary failed:", err.message);
     res.status(502).json({ error: "Could not make a summary right now" });
   }
 });

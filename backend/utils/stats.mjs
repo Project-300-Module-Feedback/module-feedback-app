@@ -20,3 +20,11 @@ export function getStats(reviews) {
 
   return stats;
 }
+
+// how many reviews gave 5, 4, 3, 2 and 1 stars (for the rating bars)
+export function getRatingCounts(reviews) {
+  return [5, 4, 3, 2, 1].map(rating => ({
+    rating,
+    count: reviews.filter(r => r.overall === rating).length,
+  }));
+}

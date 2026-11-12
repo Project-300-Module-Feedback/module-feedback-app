@@ -5,6 +5,7 @@ import { ListfeedbackComponent } from './listfeedback/listfeedback';
 import { StudentDetailsComponent } from './student-details/student-details';
 import { NotFoundComponent } from './not-found/not-found';
 import { ThanksComponent } from './thanks/thanks';
+import { ModulereviewsComponent } from './modulereviews/modulereviews';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'modules', pathMatch: 'full' },
@@ -21,9 +22,8 @@ export const routes: Routes = [
   { path: 'student/feedback', component: AddfeedbackComponent },
   { path: 'admin', component: ListfeedbackComponent },
   { path: 'student/thanks', component: ThanksComponent },
+  { path: 'lecturer', component: ModulereviewsComponent },
 
   // keep this one last, it catches any page that doesn't exist
   { path: '**', component: NotFoundComponent }
 ];
-
-

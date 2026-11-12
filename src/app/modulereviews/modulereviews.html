@@ -1,53 +1,143 @@
-<h2>Module Reviews</h2>
+<main class="container py-4">
+  <div class="row g-3 align-items-end mb-4">
+    <div class="col-12 col-md">
+      <h1>Lecturer dashboard</h1>
+      <p class="mb-0 text-body-secondary">Pick a module to see its ratings, reviews and an AI summary.</p>
+    </div>
+    <div class="col-12 col-md-5">
+      <label class="form-label" for="module-select">Module</label>
+      <select id="module-select" class="form-select" #moduleSelect (change)="pickModule(moduleSelect.value)">
+        <option value="">Pick a module</option>
+        @for (mod of service.modules(); track mod._id) {
+          <option [value]="mod._id">
+            Year {{ mod.year }} · Sem {{ mod.semester }} · {{ mod.name }}{{ mod.reviewCount ? ' (' + mod.reviewCount + ' reviews)' : '' }}
+          </option>
+        }
+      </select>
+    </div>
+  </div>
 
-@if (service.errorMsg()) {
-  <p>{{ service.errorMsg() }}</p>
-}
-
-<select #moduleSelect (change)="pickModule(moduleSelect.value)">
-  <option value="">Pick a module</option>
-  @for (mod of service.modules(); track mod._id) {
-    <option [value]="mod._id">Year {{ mod.year }} · Sem {{ mod.semester }} · {{ mod.name }}</option>
+  @if (service.errorMsg()) {
+    <div class="alert alert-danger" role="alert">{{ service.errorMsg() }}</div>
   }
-</select>
 
-@if (service.moduleData(); as data) {
-  <p>{{ data.count }} reviews</p>
+  @if (!selectedId) {
+    <div class="border rounded p-4 text-center text-body-secondary">
+      Choose a module above to see how students rated it.
+    </div>
+  }
 
-  @if (!data.enough) {
-    <p>Results show once this module has at least {{ data.minReviews }} reviews. This keeps students anonymous.</p>
-  } @else {
-    <h3>Averages (out of 5)</h3>
-    <ul>
-      <li>Overall: {{ data.stats?.overall }}</li>
-      <li>Teaching: {{ data.stats?.teaching }}</li>
-      <li>Content: {{ data.stats?.content }}</li>
-      <li>Assessment fairness: {{ data.stats?.assessmentFairness }}</li>
-      <li>Study hours per week: {{ data.stats?.hoursPerWeek }}</li>
-      <li>Would recommend: {{ data.stats?.recommendPercent }}%</li>
-    </ul>
-
-    <button (click)="summarise()" [disabled]="service.summaryLoading()">Summarise with AI</button>
-
-    @if (service.summaryLoading()) {
-      <p>Making summary...</p>
-    }
-    @if (service.summary()) {
-      <p style="white-space: pre-line">{{ service.summary() }}</p>
-    }
-
-    <h3>Reviews</h3>
-    @for (review of data.reviews; track review._id) {
+  @if (service.moduleData(); as data) {
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
       <div>
-        <strong>{{ review.headline }}</strong> · {{ review.overall }}/5
-        <p>{{ review.body }}</p>
-        <small>
-          Taken {{ review.yearTaken }} ·
-          {{ review.recommend ? 'Recommends' : "Doesn't recommend" }} ·
-          {{ review.createdAt | date: 'd MMM yyyy' }}
-        </small>
-        <hr>
+        @if (selectedModule; as mod) {
+          <p class="text-body-secondary mb-1">{{ mod.code }} · Year {{ mod.year }} · Semester {{ mod.semester }}</p>
+          <h2 class="h3 mb-0">{{ mod.name }}</h2>
+        }
       </div>
+      <span class="badge text-bg-secondary fs-6">{{ data.count }} reviews</span>
+    </div>
+
+    @if (!data.enough) {
+      <div class="alert alert-secondary" role="status">
+        Results show once this module has at least {{ data.minReviews }} reviews. This keeps students anonymous.
+      </div>
+    } @else {
+      <!-- rating cards -->
+      <div class="row g-3 mb-4">
+        @for (card of ratingCards; track card.key) {
+          <div class="col-6 col-lg-3">
+            <div class="card h-100">
+              <div class="card-body">
+                <p class="text-body-secondary mb-1">{{ card.label }}</p>
+                <p class="display-6 mb-2">{{ data.stats?.[card.key] ?? '–' }}<span class="fs-6 text-body-secondary"> / 5</span></p>
+                <div class="progress" role="progressbar" [attr.aria-label]="card.label + ' rating'" [attr.aria-valuenow]="data.stats?.[card.key]" aria-valuemin="0" aria-valuemax="5">
+                  <div class="progress-bar" [style.width.%]="outOfFive(data.stats?.[card.key] ?? null)"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+        <div class="col-6 col-lg-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <p class="text-body-secondary mb-1">Would recommend</p>
+              <p class="display-6 mb-2">{{ data.stats?.recommendPercent ?? '–' }}%</p>
+              <div class="progress" role="progressbar" aria-label="Would recommend" [attr.aria-valuenow]="data.stats?.recommendPercent" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar bg-success" [style.width.%]="data.stats?.recommendPercent ?? 0"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-lg-3">
+          <div class="card h-100">
+            <div class="card-body">
+              <p class="text-body-secondary mb-1">Study hours per week</p>
+              <p class="display-6 mb-0">{{ data.stats?.hoursPerWeek ?? '–' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mb-4">
+        <!-- 5 to 1 star breakdown -->
+        <section class="col-12 col-lg-5" aria-labelledby="ratings-heading">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3 id="ratings-heading" class="h5 mb-3">Overall ratings</h3>
+              @for (item of data.ratings; track item.rating) {
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <span class="rating-label">{{ item.rating }} ★</span>
+                  <div class="progress flex-grow-1" role="progressbar" [attr.aria-label]="item.rating + ' star reviews'" [attr.aria-valuenow]="item.count" aria-valuemin="0" [attr.aria-valuemax]="data.count">
+                    <div class="progress-bar bg-warning" [style.width.%]="ratingShare(item.count)"></div>
+                  </div>
+                  <span class="rating-count">{{ item.count }}</span>
+                </div>
+              }
+            </div>
+          </div>
+        </section>
+
+        <!-- AI summary -->
+        <section class="col-12 col-lg-7" aria-labelledby="ai-heading">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center gap-2 mb-3">
+                <h3 id="ai-heading" class="h5 mb-0">AI summary</h3>
+                <button class="btn btn-primary" (click)="summarise()" [disabled]="service.summaryLoading()">
+                  {{ service.summaryLoading() ? 'Making summary...' : 'Summarise with AI' }}
+                </button>
+              </div>
+              @if (service.summary()) {
+                <div class="alert alert-info mb-0 summary-text">{{ service.summary() }}</div>
+              } @else if (!service.summaryLoading()) {
+                <p class="text-body-secondary mb-0">Click the button to get a short summary of what students liked, struggled with and suggest.</p>
+              }
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- the reviews -->
+      <section aria-labelledby="reviews-heading">
+        <h3 id="reviews-heading" class="h4 mb-3">Student reviews</h3>
+        @for (review of data.reviews; track review._id) {
+          <article class="border rounded p-3 mb-3">
+            <div class="d-flex flex-wrap justify-content-between gap-2 mb-2">
+              <h4 class="h6 mb-0">{{ review.overall }} / 5 · {{ review.headline }}</h4>
+              <span class="badge" [class.text-bg-success]="review.recommend" [class.text-bg-secondary]="!review.recommend">
+                {{ review.recommend ? 'Recommends' : "Doesn't recommend" }}
+              </span>
+            </div>
+            <p class="mb-2">{{ review.body }}</p>
+            <p class="text-body-secondary small mb-0">
+              Teaching {{ review.teaching }}/5 · Content {{ review.content }}/5 · Fairness {{ review.assessmentFairness }}/5
+              @if (review.hoursPerWeek !== undefined) { · {{ review.hoursPerWeek }} hrs/week }
+              · Taken {{ review.yearTaken }} · {{ review.createdAt | date: 'd MMM yyyy' }}
+            </p>
+          </article>
+        }
+      </section>
     }
   }
-}
+</main>
