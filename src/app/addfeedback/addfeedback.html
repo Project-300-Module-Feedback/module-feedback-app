@@ -6,8 +6,14 @@
 
   <div class="row g-4 align-items-start">
     <section class="col-12 col-lg-8" aria-labelledby="review-title">
-      <form class="review-panel">
-        <h1 id="review-title" class="h3">Review this module</h1>
+      <form class="review-panel" (submit)="submitReview($event)">
+        <h1 id="review-title" class="h3">Review {{ feedback.selectedModule()?.name ?? 'this module' }}</h1>
+
+        @if (!moduleId) {
+          <div class="alert alert-warning">Pick a module first. <a routerLink="/modules">Go to modules</a></div>
+        } @else if (!auth.user()) {
+          <div class="alert alert-warning">You need to <a routerLink="/login">log in</a> before you can post a review.</div>
+        }
 
         <fieldset class="mb-3">
           <legend class="form-label">Overall rating</legend>
@@ -84,10 +90,14 @@
           <label class="form-check-label" for="honest">I confirm I took this module and this review is honest.</label>
         </div>
 
-        <p class="small text-body-secondary border-top pt-3 mb-3">Review submission is not available yet.</p>
+        @if (errorMsg()) {
+          <div class="alert alert-danger" role="alert">{{ errorMsg() }}</div>
+        }
         <div class="d-flex justify-content-end gap-2 border-top pt-3">
           <a class="btn btn-outline-secondary" routerLink="/modules">Cancel</a>
-          <button class="btn btn-primary" type="submit" disabled>Submit review</button>
+          <button class="btn btn-primary" type="submit" [disabled]="saving() || !moduleId">
+            {{ saving() ? 'Saving...' : 'Submit review' }}
+          </button>
         </div>
       </form>
     </section>

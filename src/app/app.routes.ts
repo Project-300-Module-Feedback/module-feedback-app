@@ -20,6 +20,7 @@ export const routes: Routes = [
   },
   { path: 'student', component: StudentDetailsComponent },
   { path: 'student/feedback', component: AddfeedbackComponent },
+  { path: 'student/feedback/:moduleId', component: AddfeedbackComponent },
   { path: 'admin', component: ListfeedbackComponent },
   { path: 'student/thanks', component: ThanksComponent },
   { path: 'lecturer', component: ModulereviewsComponent },

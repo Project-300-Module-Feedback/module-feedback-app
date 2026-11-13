@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ModuleItem, ModuleReviews } from '../models/review';
+import { ModuleItem, ModuleReviews, NewReview } from '../models/review';
 import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
@@ -49,5 +49,10 @@ export class ReviewapiService {
         this.summaryLoading.set(false);
       }
     });
+  }
+
+  // saves a student's review (the login token is added by the auth interceptor)
+  addReview(review: NewReview) {
+    return this.http.post<{ message: string; id: string }>(`${this.baseUrl}reviews`, review);
   }
 }
