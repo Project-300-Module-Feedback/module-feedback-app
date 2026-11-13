@@ -9,7 +9,9 @@ import { aiReady, summariseReviews } from "../ai/gemini.mjs";
 const router = express.Router();
 
 // need at least this many reviews before we show anything, keeps it anonymous
-const MIN_REVIEWS = 3;
+// const MIN_REVIEWS = 3;
+// set to 1 for testing so one review shows up, change back to 3 before we hand it in
+const MIN_REVIEWS = 1;
 
 // max reviews we send to gemini at once
 const MAX_FOR_AI = 100;
