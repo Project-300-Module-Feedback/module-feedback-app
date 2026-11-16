@@ -1,0 +1,11 @@
+### Should be BLOCKED (has a bad word)
+POST http://localhost:5050/feedback
+Content-Type: application/json
+
+{ "comment": "This module was shit" }
+
+### Should be SAVED (normal comment)
+POST http://localhost:5050/feedback
+Content-Type: application/json
+
+{ "comment": "Testing the bad word filter, this one is fine" }
