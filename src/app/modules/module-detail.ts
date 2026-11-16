@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FeedbackapiService } from '../services/feedbackapi.service';
+import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner';
 
 @Component({
   selector: 'app-module-detail',
   standalone: true,
-  imports: [DecimalPipe, RouterLink],
+  imports: [DecimalPipe, RouterLink, LoadingSpinnerComponent],
   templateUrl: './module-detail.html'
 })
 export class ModuleDetailComponent implements OnInit {

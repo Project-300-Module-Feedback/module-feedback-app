@@ -6,6 +6,7 @@ import { StudentDetailsComponent } from './student-details/student-details';
 import { NotFoundComponent } from './not-found/not-found';
 import { ThanksComponent } from './thanks/thanks';
 
+
 export const routes: Routes = [
   { path: '', redirectTo: 'modules', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },

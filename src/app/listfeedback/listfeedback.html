@@ -6,7 +6,7 @@
   </button>
 
   @if (service.summaryLoading()) {
-    <p class="text-muted">Making summary...</p>
+    <app-loading-spinner text="Making summary..." />
   }
   @if (service.summary()) {
     <div class="alert alert-info" style="white-space: pre-line">{{ service.summary() }}</div>

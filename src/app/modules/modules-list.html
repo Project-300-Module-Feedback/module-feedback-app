@@ -53,7 +53,7 @@
       </div>
 
       @if (service.modulesLoading()) {
-        <p role="status">Loading modules...</p>
+                <app-loading-spinner text="Loading modules..." />
       } @else if (service.modulesError()) {
         <p role="alert">Modules could not be loaded. Check the backend connection and try again.</p>
       } @else {
