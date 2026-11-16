@@ -71,8 +71,8 @@
         </div>
         <div class="mb-3">
           <label class="form-label" for="review-body">Your review</label>
-          <textarea id="review-body" name="body" class="form-control" rows="5" minlength="50" maxlength="1500" placeholder="What was good, what could be better, and what should future students know?" required></textarea>
-          <div class="form-text">Minimum 50 characters · Maximum 1500</div>
+          <textarea id="review-body" name="body" class="form-control" rows="5" minlength="50" maxlength="1500" placeholder="What was good, what could be better, and what should future students know?" #reviewBody (input)="0" required></textarea>
+                    <app-char-counter [count]="reviewBody.value.length" [min]="50" [max]="1500" />
         </div>
 
         <div class="form-check mb-2">
