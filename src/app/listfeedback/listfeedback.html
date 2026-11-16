@@ -1,6 +1,8 @@
 <div class="container mt-4" style="max-width: 600px;">
   <h2>Student Feedback</h2>
 
+  <app-admin-stats />
+
   <button class="btn btn-primary mb-3" (click)="service.getSummary()" [disabled]="service.summaryLoading()">
     Summarise with AI
   </button>
