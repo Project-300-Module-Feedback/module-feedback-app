@@ -33,6 +33,11 @@ const makeLimiter = () =>
   const normaliseEmail = (email) => String(email || "").trim().toLowerCase();
 const isAtuEmail = (email) => /^[^\s@]+@atu\.ie$/.test(email);
 
+// student emails are a letter and 8 numbers, e.g. s00123456@atu.ie
+// anything else (like john.smith@atu.ie) is a staff email, so they get the lecturer role
+// admins are still set by hand in the database
+const roleFromEmail = (email) => (/^[a-z]\d{8}@atu\.ie$/.test(email) ? "student" : "lecturer");
+
 async function issueCode(email) {
   await VerificationCode.deleteMany({ email });
 
@@ -69,7 +74,7 @@ router.post("/register", makeLimiter(), async (req, res) => {
     existing.passwordHash = passwordHash;
     await existing.save();
   } else {
-    await User.create({ email, passwordHash, role: "student", verified: false });
+    await User.create({ email, passwordHash, role: roleFromEmail(email), verified: false });
   }
 
   await issueCode(email);

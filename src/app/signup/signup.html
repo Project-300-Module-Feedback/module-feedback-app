@@ -1,0 +1,30 @@
+<main class="container py-5" style="max-width: 420px;">
+  <div class="card shadow-sm">
+    <div class="card-body p-4">
+      <h1 class="h4 mb-1">Create your account</h1>
+      <p class="text-body-secondary small mb-4">Students use their student email (s00123456&#64;atu.ie). Lecturers use their staff email.</p>
+
+      <form (submit)="signup($event, email.value, password.value, confirm.value)">
+        <label class="form-label" for="email">ATU email</label>
+        <input #email id="email" class="form-control mb-3" type="email" placeholder="s00123456@atu.ie" autocomplete="email" required>
+
+        <label class="form-label" for="password">Password</label>
+        <input #password id="password" class="form-control" type="password" minlength="8" autocomplete="new-password" required>
+        <div class="form-text mb-3">At least 8 characters</div>
+
+        <label class="form-label" for="confirm">Confirm password</label>
+        <input #confirm id="confirm" class="form-control mb-3" type="password" autocomplete="new-password" required>
+
+        @if (errorMsg()) {
+          <div class="alert alert-danger py-2 small" role="alert">{{ errorMsg() }}</div>
+        }
+
+        <button class="btn btn-primary w-100" type="submit" [disabled]="loading()">
+          {{ loading() ? 'Creating account...' : 'Create account' }}
+        </button>
+      </form>
+
+      <p class="text-center small mt-3 mb-0">Already have an account? <a routerLink="/login">Log in</a></p>
+    </div>
+  </div>
+</main>

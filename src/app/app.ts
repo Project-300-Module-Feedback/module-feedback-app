@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLink } from '@angular/router';
+import { Router, RouterOutlet, RouterLink } from '@angular/router';
 import { FeedbackapiService } from './services/feedbackapi.service';
+import { AuthService } from './services/auth.service';
 import { ThemeToggleComponent } from './theme-toggle/theme-toggle';
 
 @Component({
@@ -11,5 +12,10 @@ import { ThemeToggleComponent } from './theme-toggle/theme-toggle';
   styleUrl: './app.css'
 })
 export class App {
-  constructor(public service: FeedbackapiService) {}
+  constructor(public service: FeedbackapiService, public auth: AuthService, private router: Router) {}
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
+  }
 }

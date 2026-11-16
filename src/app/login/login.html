@@ -1,16 +1,30 @@
-<div class="container mt-4" style="max-width: 360px;">
-  <h2>Login</h2>
+<main class="container py-5" style="max-width: 420px;">
+  <div class="card shadow-sm">
+    <div class="card-body p-4">
+      <h1 class="h4 mb-1">Log in</h1>
+      <p class="text-body-secondary small mb-4">Use your ATU email to rate and review your modules.</p>
 
-  <input #email class="form-control mb-2" type="email" placeholder="ATU email">
-  <input #password class="form-control mb-2" type="password" placeholder="Password"
-         (keyup.enter)="login(email.value, password.value)">
+      @if (infoMsg()) {
+        <div class="alert alert-success py-2 small">{{ infoMsg() }}</div>
+      }
 
-  <button class="btn btn-primary w-100" [disabled]="loading()"
-          (click)="login(email.value, password.value)">
-    {{ loading() ? 'Logging in...' : 'Login' }}
-  </button>
+      <form (submit)="login($event, email.value, password.value)">
+        <label class="form-label" for="email">ATU email</label>
+        <input #email id="email" class="form-control mb-3" type="email" placeholder="s00123456@atu.ie" autocomplete="email" required>
 
-  @if (errorMsg()) {
-    <p class="text-danger mt-2">{{ errorMsg() }}</p>
-  }
-</div>
+        <label class="form-label" for="password">Password</label>
+        <input #password id="password" class="form-control mb-3" type="password" autocomplete="current-password" required>
+
+        @if (errorMsg()) {
+          <div class="alert alert-danger py-2 small" role="alert">{{ errorMsg() }}</div>
+        }
+
+        <button class="btn btn-primary w-100" type="submit" [disabled]="loading()">
+          {{ loading() ? 'Logging in...' : 'Log in' }}
+        </button>
+      </form>
+
+      <p class="text-center small mt-3 mb-0">New here? <a routerLink="/signup">Create an account</a></p>
+    </div>
+  </div>
+</main>
