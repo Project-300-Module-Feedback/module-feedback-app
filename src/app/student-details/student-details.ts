@@ -16,6 +16,6 @@ export class StudentDetailsComponent implements OnInit {
 
   continue(event: Event) {
     event.preventDefault();
-    this.router.navigate(['/student/feedback']);
+    this.router.navigate(['/modules']);
   }
 }

@@ -19,7 +19,7 @@ export const routes: Routes = [
     loadComponent: () => import('./modules/module-detail').then(module => module.ModuleDetailComponent)
   },
   { path: 'student', component: StudentDetailsComponent },
-  { path: 'student/feedback', component: AddfeedbackComponent },
+  { path: 'modules/:id/feedback', component: AddfeedbackComponent },
   { path: 'admin', component: ListfeedbackComponent },
   { path: 'student/thanks', component: ThanksComponent },
 

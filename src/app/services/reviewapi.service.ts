@@ -50,4 +50,7 @@ export class ReviewapiService {
       }
     });
   }
+    submitReview(review: any) {
+    return this.http.post(`${this.baseUrl}reviews`, review);
+  }
 }
