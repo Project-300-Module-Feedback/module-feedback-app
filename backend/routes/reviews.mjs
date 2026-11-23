@@ -3,8 +3,8 @@ import mongoose from "mongoose";
 import Review from "../models/Review.mjs";
 import { getStats } from "../utils/stats.mjs";
 import { aiReady, summariseReviews } from "../ai/gemini.mjs";
-import { requireAuth, requireRole } from "./middleware/auth.mjs";
-import { hasBadWords } from "./utils/badwords.mjs";
+import { requireAuth, requireRole } from "../middleware/auth.mjs";
+import { hasBadWords } from "../utils/badwords.mjs";
 
 const router = express.Router();
 
