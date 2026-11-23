@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import Review from "../models/Review.mjs";
 import { getStats } from "../utils/stats.mjs";
 import { aiReady, summariseReviews } from "../ai/gemini.mjs";
+import { requireAuth, requireRole } from "./middleware/auth.mjs";
+import { hasBadWords } from "./utils/badwords.mjs";
 
 const router = express.Router();
 
@@ -61,6 +63,39 @@ router.get("/summary/:moduleId", async (req, res) => {
     res.status(200).json({ summary });
   } catch (err) {
     res.status(502).json({ error: "Could not make a summary right now" });
+  }
+});
+
+router.post("/", requireAuth, requireRole("student"), async (req, res) => {
+  // one review per student per module
+  const existing = await Review.findOne({ moduleId: req.body.moduleId, userId: req.user.id });
+  if (existing) {
+    return res.status(409).json({ error: "You have already reviewed this module" });
+  }
+
+  if (hasBadWords(req.body.headline) || hasBadWords(req.body.body)) {
+    return res.status(400).json({ error: "Please keep your review respectful" });
+  }
+
+  const review = new Review({
+    moduleId: req.body.moduleId,
+    userId: req.user.id,
+    overall: req.body.overall,
+    teaching: req.body.teaching,
+    content: req.body.content,
+    assessmentFairness: req.body.assessmentFairness,
+    hoursPerWeek: req.body.hoursPerWeek,
+    yearTaken: req.body.yearTaken,
+    recommend: req.body.recommend,
+    headline: req.body.headline,
+    body: req.body.body,
+  });
+
+  try {
+    await review.save();
+    res.status(201).json({ message: "Review saved" });
+  } catch (err) {
+    res.status(400).json({ error: "Please fill in all the fields correctly" });
   }
 });
 

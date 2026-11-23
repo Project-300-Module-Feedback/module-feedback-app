@@ -4,6 +4,7 @@ import { connectDB } from "./db/connect.mjs";
 import Module from "./models/Module.mjs";
 import Review from "./models/Review.mjs";
 
+
 // fake reviews just for testing, run seed.mjs first so the modules are there
 // change this if you want to use a different module
 const MODULE_CODE = "COMP07180"; // Web Programming 2
