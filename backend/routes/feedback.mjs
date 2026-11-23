@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import { aiReady, summariseComments } from "../ai/gemini.mjs";
+import { hasBadWords } from "../utils/badWords.mjs";
 
 const router = express.Router();
 const collection = () => mongoose.connection.collection("feedback");
@@ -40,6 +41,9 @@ router.get("/summary", async (req, res) => {
 router.post("/", async (req, res) => {
   const comment = req.body.comment?.trim();
   if (!comment) return res.status(400).json({ error: "Comment is required" });
+    if (hasBadWords(comment)) {
+    return res.status(400).json({ error: "Please keep your feedback respectful" });
+  }
 
   const result = await collection().insertOne({ comment, date: new Date() });
   res.status(201).json(result);

@@ -10,6 +10,7 @@ import { ThanksComponent } from './thanks/thanks';
 import { ModulereviewsComponent } from './modulereviews/modulereviews';
 import { authGuard, roleGuard } from './services/auth.guard';
 
+
 export const routes: Routes = [
   // first thing anyone sees is the login page
   { path: '', redirectTo: 'login', pathMatch: 'full' },

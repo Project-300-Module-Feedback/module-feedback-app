@@ -1,14 +1,25 @@
+<<<<<<< HEAD
 import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FeedbackapiService } from '../services/feedbackapi.service';
 import { ReviewapiService } from '../services/reviewapi.service';
 import { NewReview } from '../models/review';
+=======
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { CharCounterComponent } from '../char-counter/char-counter';
+>>>>>>> origin/main
 
 @Component({
   selector: 'app-addfeedback',
   standalone: true,
+<<<<<<< HEAD
   imports: [RouterLink],
+=======
+ // imports: [RouterLink],
+  imports: [CharCounterComponent],
+>>>>>>> origin/main
   templateUrl: './addfeedback.html',
   styleUrl: './addfeedback.css'
 })

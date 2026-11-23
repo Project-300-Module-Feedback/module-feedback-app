@@ -3,11 +3,14 @@ import { DecimalPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ModuleSummary } from '../models/module';
 import { FeedbackapiService } from '../services/feedbackapi.service';
+import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner';
+
+
 
 @Component({
   selector: 'app-modules-list',
   standalone: true,
-  imports: [DecimalPipe, RouterLink],
+  imports: [DecimalPipe, RouterLink, LoadingSpinnerComponent],
   templateUrl: './modules-list.html'
 })
 export class ModulesListComponent implements OnInit {

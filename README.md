@@ -173,15 +173,40 @@ Next deadline: **MVP finished – Fri 27 Nov**
 | Name | Assigned work |
 |------|---------------|
 | Mehmet |  |
-| Horuiaf |  |
+| Horuiaf | Loading spinner, admin stats, character counter, bad word filter |
 | Dylan |  |
 | Benjamin |  |
 
 **Done:**
-- 
+- Loading spinner on the modules and admin pages
+- Stats boxes on the admin page (comments, reviews, average rating, % recommend)
+- Character counter on the review form
+- Bad word filter blocks rude comments
 
 **Struggles:**
 - 
 
 **Next week:**
 - 
+
+---
+### Week 6
+
+**Goal:**
+
+| Name | Assigned work |
+|------|---------------|
+| Mehmet |  |
+| Horuiaf | |
+| Dylan |  |
+| Benjamin |  |
+
+
+**Done:**
+
+**Struggles:**
+- 
+
+**Next week:**
+-
+

@@ -1,12 +1,14 @@
 <div class="container mt-4" style="max-width: 600px;">
   <h2>Student Feedback</h2>
 
+  <app-admin-stats />
+
   <button class="btn btn-primary mb-3" (click)="service.getSummary()" [disabled]="service.summaryLoading()">
     Summarise with AI
   </button>
 
   @if (service.summaryLoading()) {
-    <p class="text-muted">Making summary...</p>
+    <app-loading-spinner text="Making summary..." />
   }
   @if (service.summary()) {
     <div class="alert alert-info" style="white-space: pre-line">{{ service.summary() }}</div>

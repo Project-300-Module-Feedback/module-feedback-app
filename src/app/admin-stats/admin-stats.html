@@ -1,0 +1,26 @@
+<div class="row g-2 mb-4">
+  <div class="col-6 col-md-3">
+    <div class="border rounded p-3 text-center h-100">
+      <div class="fs-4 fw-bold">{{ service.items().length }}</div>
+      <div class="small text-body-secondary">Comments</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="border rounded p-3 text-center h-100">
+      <div class="fs-4 fw-bold">{{ totalReviews }}</div>
+      <div class="small text-body-secondary">Reviews</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="border rounded p-3 text-center h-100">
+      <div class="fs-4 fw-bold">{{ averageRating === null ? '-' : (averageRating | number:'1.1-1') }}</div>
+      <div class="small text-body-secondary">Average rating</div>
+    </div>
+  </div>
+  <div class="col-6 col-md-3">
+    <div class="border rounded p-3 text-center h-100">
+      <div class="fs-4 fw-bold">{{ recommendPercent === null ? '-' : recommendPercent + '%' }}</div>
+      <div class="small text-body-secondary">Would recommend</div>
+    </div>
+  </div>
+</div>
