@@ -1,12 +1,12 @@
 <main class="container review-page py-4">
   <nav aria-label="Breadcrumb" class="small mb-3">
-    <a routerLink="/modules">Modules</a>
+    <a [routerLink]="['/modules', moduleId]">Modules</a>
     <span class="text-body-secondary"> / Write a review</span>
   </nav>
 
   <div class="row g-4 align-items-start">
     <section class="col-12 col-lg-8" aria-labelledby="review-title">
-      <form class="review-panel">
+      <form class="review-panel" (submit)="submit($event)">
         <h1 id="review-title" class="h3">Review this module</h1>
 
         <fieldset class="mb-3">
@@ -84,14 +84,16 @@
           <label class="form-check-label" for="honest">I confirm I took this module and this review is honest.</label>
         </div>
 
-        <p class="small text-body-secondary border-top pt-3 mb-3">Review submission is not available yet.</p>
+       @if (errorMsg()) {
+          <p class="text-danger border-top pt-3 mb-3">{{ errorMsg() }}</p>
+        }
         <div class="d-flex justify-content-end gap-2 border-top pt-3">
-          <a class="btn btn-outline-secondary" routerLink="/modules">Cancel</a>
-          <button class="btn btn-primary" type="submit" disabled>Submit review</button>
+          <a class="btn btn-outline-secondary" [routerLink]="['/modules', moduleId]">Cancel</a>
+          <button class="btn btn-primary" type="submit">Submit review</button>
         </div>
       </form>
     </section>
-
+  
     <aside class="col-12 col-lg-4">
       <section class="guidelines" aria-labelledby="guidelines-title">
         <h2 id="guidelines-title" class="h6">Review guidelines</h2>
