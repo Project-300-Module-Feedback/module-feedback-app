@@ -71,20 +71,14 @@
           </div>
         </fieldset>
 
-        <div class="mb-3">
-          <label class="form-label" for="headline">Headline</label>
-          <input id="headline" name="headline" class="form-control" maxlength="100" placeholder="Sum it up in one line" required>
-        </div>
+        
         <div class="mb-3">
           <label class="form-label" for="review-body">Your review</label>
           <textarea id="review-body" name="body" class="form-control" rows="5" minlength="50" maxlength="1500" placeholder="What was good, what could be better, and what should future students know?" #reviewBody (input)="0" required></textarea>
                     <app-char-counter [count]="reviewBody.value.length" [min]="50" [max]="1500" />
         </div>
 
-        <div class="form-check mb-2">
-          <input id="anonymous" name="anonymous" class="form-check-input" type="checkbox" checked>
-          <label class="form-check-label" for="anonymous">Post anonymously</label>
-        </div>
+      
         <div class="form-check mb-3">
           <input id="honest" name="honest" class="form-check-input" type="checkbox" required>
           <label class="form-check-label" for="honest">I confirm I took this module and this review is honest.</label>
